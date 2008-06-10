@@ -108,6 +108,10 @@ module Associations
         @expected_options[:include] = (models.length == 1)? models.first: models
         self
       end
+      def through(assoc_name)
+        @expected_options[:through] = assoc_name
+        self
+      end
 
     end
     class BelongsToReflection < AssociationReflection

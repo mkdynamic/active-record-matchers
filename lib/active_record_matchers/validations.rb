@@ -5,12 +5,11 @@ module Validations
       @expected = expected
     end
 
-    # Fails if target is valid, doesn't have a blank error,
-    # or can be saved (for thoroughness!)
+    # Fails if target is valid or doesn't have a blank error
     def matches?(target)
       @target = target
       @target.send("#{@expected}=", nil)    
-      is_valid = @target.valid?
+      is_valid = @target.valid? # must be run before to make the next line work
       has_errors = [@target.errors.on(@expected)].flatten.include?(ActiveRecord::Errors.default_error_messages[:blank])      
       (is_valid or !has_errors) ? false : true
     end
