@@ -10,7 +10,7 @@ module Validations
       @target = target
       @target.send("#{@expected}=", nil)    
       is_valid = @target.valid? # must be run before to make the next line work
-      has_errors = [@target.errors.on(@expected)].flatten.include?(ActiveRecord::Errors.default_error_messages[:blank])      
+      has_errors = [@target.errors.on(@expected)].flatten.include?(I18n.translate('activerecord.errors.messages')[:blank])      
       (is_valid or !has_errors) ? false : true
     end
 
